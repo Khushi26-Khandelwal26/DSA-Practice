@@ -1,0 +1,113 @@
+There are two approaches to do level order
+i am doing both in this file
+
+#include <iostream>
+#include <queue>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* left;
+    Node* right;
+    Node(int val){
+        data = val;
+        left = NULL;
+        right = NULL;
+    }
+};
+int height(Node* root){
+    if (root == NULL){
+        return 0;
+    }
+    
+    else{
+        int lheight = height(root->left);
+        int rheight = height(root->right);
+        if(lheight>rheight){
+            return (lheight+1);
+        }
+        else{
+            return (rheight+1);
+        }
+    }
+}
+void level(Node* root){
+    queue<Node*> list_level;
+    list_level.push(root);
+    while(list_level.empty() == false){
+        Node* node = list_level.front();
+        cout<<node->data;
+        list_level.pop();
+        if(node->left!= NULL){
+            list_level.push(node->left);
+        }
+        if(node->right!= NULL){
+            list_level.push(node->right);
+        }
+    }
+}
+
+int main() {
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+    root->right->left = new Node(6);
+    root->right->right = new Node(7);
+    level(root);
+    return 0;
+}
+
+
+2nd version 
+
+void printCurrentLevel(node* root, int level);
+int height(node* node);
+node* newNode(int data);
+ 
+// Function to print level order traversal a tree
+void printLevelOrder(node* root)
+{
+    int h = height(root);
+    int i;
+    for (i = 1; i <= h; i++)
+        printCurrentLevel(root, i);
+}
+ 
+// Print nodes at a current level
+void printCurrentLevel(node* root, int level)
+{
+    if (root == NULL)
+        return;
+    if (level == 1)
+        cout << root->data << " ";
+    else if (level > 1) {
+        printCurrentLevel(root->left, level - 1);
+        printCurrentLevel(root->right, level - 1);
+    }
+}
+ 
+// Compute the "height" of a tree -- the number of
+// nodes along the longest path from the root node
+// down to the farthest leaf node.
+int height(node* node)
+{
+    if (node == NULL)
+        return 0;
+    else {
+         
+        // Compute the height of each subtree
+        int lheight = height(node->left);
+        int rheight = height(node->right);
+ 
+        // Use the larger one
+        if (lheight > rheight) {
+            return (lheight + 1);
+        }
+        else {
+            return (rheight + 1);
+        }
+    }
+}
+ 
