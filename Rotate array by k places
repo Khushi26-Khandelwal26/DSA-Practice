@@ -14,3 +14,24 @@ vector<int> rotateArray(vector<int>arr, int k) {
     return arr;
 }
 
+
+                                                                       //2nd approach//
+vector<int> rotateArray(vector<int>arr, int k) {
+    int n = arr.size();
+    int temp;
+    k = k%n;
+    for(int j = 0;j<k;j++){
+        temp = arr[0];
+        for(int i =1;i<n;i++){
+            
+            arr[i-1] = arr[i];
+        }
+        arr[n-1] = temp;
+    }
+    return arr;
+}
+                                                                 //3rd approach//
+
+
+
+
