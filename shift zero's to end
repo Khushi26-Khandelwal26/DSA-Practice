@@ -1,0 +1,42 @@
+vector<int> moveZeros(int n, vector<int> a) {
+    vector<int> temp;
+    int count = 0;
+    for(int i = 0;i<n;i++){
+        if (a[i] != 0){
+            temp.push_back(a[i]);
+        }
+        else{
+            count++;
+        }
+    }
+    for(int i = 0;i<n-count;i++){
+        a[i] = temp[i];
+    }
+    for(int i = n-count;i<n;i++){
+        a[i] = 0;
+    }
+    return a;
+}
+
+                                                                    //2nd approch//
+
+  vector<int> moveZeros(int n, vector<int> a) {
+    int j =0;
+    int count = 0;
+    for(int i = 0;i<n;i++){
+        if(a[i] == 0){
+            
+            count++;
+            continue;
+        }
+        else{
+            a[j] = a[i];
+            j++;
+        }
+    }
+    for(int i = n-count;i<n;i++){
+        a[i] = 0;
+        
+    }
+    return a;
+}
